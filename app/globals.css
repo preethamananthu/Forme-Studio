@@ -1,0 +1,158 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* shadcn tokens — warm studio palette */
+    --background: 40 30% 96%;
+    --foreground: 30 15% 10%;
+    --card: 40 30% 96%;
+    --card-foreground: 30 15% 10%;
+    --popover: 40 30% 96%;
+    --popover-foreground: 30 15% 10%;
+    --primary: 18 63% 47%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 36 20% 91%;
+    --secondary-foreground: 30 15% 18%;
+    --muted: 36 20% 91%;
+    --muted-foreground: 30 8% 54%;
+    --accent: 36 20% 91%;
+    --accent-foreground: 30 15% 18%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 34 18% 84%;
+    --input: 34 18% 84%;
+    --ring: 18 63% 47%;
+    --radius: 0.25rem;
+
+    /* Studio custom tokens */
+    --studio-cream: #f7f4ef;
+    --studio-sand: #efebe3;
+    --studio-stone: #e6e0d6;
+    --studio-ink: #1a1712;
+    --studio-ink-2: #4a453e;
+    --studio-ink-3: #8a8278;
+    --studio-ink-4: #b8b0a4;
+    --studio-rust: #c45c2a;
+    --studio-rust-hover: #a84a20;
+    --studio-rust-light: #fae8de;
+    --studio-green: #2a6645;
+    --studio-green-light: #dff0e8;
+  }
+
+  .dark {
+    --background: 30 12% 7%;
+    --foreground: 36 15% 94%;
+    --card: 30 12% 9%;
+    --card-foreground: 36 15% 94%;
+    --popover: 30 12% 9%;
+    --popover-foreground: 36 15% 94%;
+    --primary: 20 65% 56%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 30 10% 14%;
+    --secondary-foreground: 36 15% 80%;
+    --muted: 30 10% 14%;
+    --muted-foreground: 30 8% 54%;
+    --accent: 30 10% 14%;
+    --accent-foreground: 36 15% 80%;
+    --destructive: 0 63% 48%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 30 10% 18%;
+    --input: 30 10% 18%;
+    --ring: 20 65% 56%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+
+  ::selection {
+    background: var(--studio-rust-light);
+    color: var(--studio-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--studio-rust);
+    outline-offset: 2px;
+  }
+
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--studio-stone); border-radius: 3px; }
+
+  .skip-nav {
+    position: absolute;
+    top: -100%;
+    left: 1rem;
+    background: var(--studio-rust);
+    color: white;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    z-index: 9999;
+    border-radius: 0 0 4px 4px;
+    transition: top 0.15s;
+  }
+  .skip-nav:focus { top: 0; }
+}
+
+@layer components {
+  /* Container */
+  .studio-container {
+    @apply max-w-5xl mx-auto px-6;
+  }
+
+  /* Section spacing */
+  .section-py {
+    @apply py-20 md:py-28;
+  }
+
+  /* Typography */
+  .text-display {
+    @apply font-serif text-3xl md:text-4xl leading-tight tracking-tight;
+  }
+
+  .text-hero {
+    @apply font-serif text-4xl md:text-5xl leading-none tracking-tight;
+  }
+
+  /* Label (mono eyebrow above headings) */
+  .label-mono {
+    @apply font-mono text-2xs tracking-[0.15em] uppercase text-studio-ink-3;
+  }
+
+  /* Studio-themed shadcn button overrides */
+  .btn-studio-primary {
+    @apply bg-studio-rust text-white hover:bg-studio-rust-hover
+           font-mono text-2xs tracking-[0.1em] uppercase
+           px-6 py-3 rounded-none transition-colors duration-200;
+  }
+
+  .btn-studio-outline {
+    @apply border border-border text-studio-ink-2
+           hover:border-studio-rust hover:text-studio-rust
+           font-mono text-2xs tracking-[0.1em] uppercase
+           px-6 py-3 rounded-none transition-colors duration-200;
+  }
+
+  /* Card base */
+  .studio-card {
+    @apply bg-card border border-border
+           transition-all duration-200;
+  }
+
+  .studio-card-hover {
+    @apply hover:-translate-y-0.5 hover:border-studio-rust;
+  }
+}
