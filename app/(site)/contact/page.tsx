@@ -34,7 +34,7 @@ const schema = z.object({
 type FormValues = z.infer<typeof schema>
 
 const whatsappNumber = process.env.NEXT_PUBLIC_STUDIO_WHATSAPP ?? ''
-const studioEmail = 'hello@formestudio.in'
+const studioEmail = process.env.NEXT_PUBLIC_STUDIO_EMAIL ?? ''
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false)

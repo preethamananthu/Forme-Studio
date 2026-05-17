@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
 
     await resend.emails.send({
       from: 'Studio Audit <onboarding@resend.dev>',
-      to: process.env.STUDIO_EMAIL ?? '',
+      to: process.env.NEXT_PUBLIC_STUDIO_EMAIL ?? '',
       subject: `Free audit request: ${data.businessName}`,
       text: [
         `Name: ${data.name}`,

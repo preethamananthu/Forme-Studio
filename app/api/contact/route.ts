@@ -26,21 +26,32 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ ok: true })
     }
 
-    await resend.emails.send({
-      from: 'Studio Contact <onboarding@resend.dev>',
-      to: process.env.STUDIO_EMAIL ?? '',
+    const toEmail = process.env.NEXT_PUBLIC_STUDIO_EMAIL || 'hello@formestudio.in'
+    const fromEmail = process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev'
+
+    const { error } = await resend.emails.send({
+      from: fromEmail,
+      to: toEmail,
       subject: `New enquiry from ${data.businessName}`,
-      text: [
-        `Name: ${data.name}`,
-        `Business: ${data.businessName}`,
-        `WhatsApp: ${data.whatsapp}`,
-        `Email: ${data.email}`,
-        `Type: ${data.businessType}`,
-        `Has website: ${data.hasWebsite}`,
-        `Budget: ${data.budget}`,
-        `Message: ${data.message}`,
-      ].join('\n'),
+      html: `
+        <h2>New Project Enquiry</h2>
+        <p><strong>Name:</strong> ${data.name}</p>
+        <p><strong>Business:</strong> ${data.businessName}</p>
+        <p><strong>Type:</strong> ${data.businessType}</p>
+        <p><strong>Email:</strong> ${data.email}</p>
+        <p><strong>WhatsApp:</strong> +91 ${data.whatsapp}</p>
+        <p><strong>Website:</strong> ${data.hasWebsite}</p>
+        <p><strong>Budget:</strong> ${data.budget}</p>
+        <hr />
+        <h3>Project Details</h3>
+        <p>${data.message.replace(/\n/g, '<br>')}</p>
+      `,
     })
+
+    if (error) {
+      console.error('Resend error:', error)
+      return NextResponse.json({ error: 'Failed to send email' }, { status: 500 })
+    }
 
     return NextResponse.json({ ok: true })
   } catch (err) {
