@@ -1,7 +1,7 @@
 import { sanityClient } from './client'
 import type { CaseStudy, BlogPost, Service, TeamMember } from './types'
 
-const REVALIDATE_HOUR = { next: { revalidate: 3600 } }
+const REVALIDATE_HOUR = { next: { revalidate: 60 } }
 const REVALIDATE_DAY = { next: { revalidate: 86400 } }
 
 export async function getFeaturedCaseStudies(): Promise<CaseStudy[]> {
